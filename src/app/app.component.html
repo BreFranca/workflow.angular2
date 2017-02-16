@@ -1,0 +1,17 @@
+<section id="wrapper" #wrapper [class.loaded]="loaded">
+
+  
+  <!--NAV-->
+  <nav id="navMaster">
+    <a class="link" routerLinkActive="active" routerLink="">
+      <span>Home</span>
+    </a>
+    <a class="link" routerLinkActive="active" routerLink="form">
+      <span>Form</span>
+    </a>
+  </nav>
+
+  <!--ROUTE PAGES-->
+  <router-outlet></router-outlet>
+
+</section>

@@ -1,0 +1,107 @@
+ <section class="container" id="pageSignup">
+
+  <form [formGroup]="formSignup" (ngSubmit)="onSubmit()" id="formSignup" #form>
+
+    <div class="field">
+      <label for="email">Email *</label> 
+      <input type="email" [(ngModel)]="email" name="email" id="email" [formControl]="formSignup.controls['email']">
+      <div *ngIf="formSignup.controls['email'].hasError('required') && formSignup.controls['email'].touched" class="alert">O preenchimento do Email é obrigatório.</div>
+      <div *ngIf="formSignup.controls['email'].hasError('pattern') && formSignup.controls['email'].touched" class="alert">O Email não está no formato correto.</div>
+    </div>
+
+    <div class="field">
+      <label for="password">Senha *</label> 
+      <input type="password" [(ngModel)]="password" name="password" id="password" [formControl]="formSignup.controls['password']">
+      <div *ngIf="formSignup.controls['password'].hasError('required') && formSignup.controls['password'].touched" class="alert">O preenchimento do Senha é obrigatório.</div>
+      <div *ngIf="formSignup.controls['password'].hasError('pattern') && formSignup.controls['password'].touched" class="alert">O campo senha aceita apenas letras.</div>      
+    </div>
+
+    <div class="field">
+      <label for="passwordConfirmation">Repita a senha *</label> 
+      <input type="password" [(ngModel)]="passwordConfirmation" name="passwordConfirmation" id="passwordConfirmation" [formControl]="formSignup.controls['passwordConfirmation']">
+      <div *ngIf="formSignup.controls['passwordConfirmation'].hasError('required') && formSignup.controls['passwordConfirmation'].touched" class="alert">O preenchimento da Repetição senha é obrigatório.</div>
+      <div *ngIf="passwordConfirmation != password && formSignup.controls['passwordConfirmation'].touched" class="alert">A Repetição da senha não está correta.</div>
+    </div>
+
+    <div class="field">
+      <label for="fullName">Nome Completo *</label> 
+      <input type="text" [(ngModel)]="fullName" name="fullName" id="fullName" [formControl]="formSignup.controls['fullName']">
+      <div *ngIf="formSignup.controls['fullName'].hasError('required') && formSignup.controls['fullName'].touched" class="alert">O preenchimento do Nome Completo é obrigatório.</div>
+      <div *ngIf="formSignup.controls['fullName'].hasError('minlength') && formSignup.controls['fullName'].touched" class="alert">O Nome Completo deve conter no mínimo 2 caracteres.</div>
+      <div *ngIf="formSignup.controls['fullName'].hasError('maxlength') && formSignup.controls['fullName'].touched" class="alert">O Nome Completo deve conter no máximo 40 caracteres.</div>
+      <div *ngIf="formSignup.controls['fullName'].hasError('pattern') && formSignup.controls['fullName'].touched" class="alert">O campo Nome Completo aceita apenas letras espaços.</div>
+    </div>
+
+    <div class="field" #datepicker>
+      <label for="birthDate">Data de Nascimento *</label> 
+      <input type="date" [(ngModel)]="birthDate" name="birthDate" id="birthDate" [formControl]="formSignup.controls['birthDate']">
+      <div *ngIf="formSignup.controls['birthDate'].hasError('required') && formSignup.controls['birthDate'].touched" class="alert">O preenchimento da Data de Nascimento é obrigatório.</div>
+      <!--<div *ngIf="formSignup.controls['birthDate'].hasError('pattern') && formSignup.controls['birthDate'].touched" class="alert">A Data de Nascimento não está no formato correto.</div>-->
+    </div>
+
+    <div class="field">
+      <label for="zipCode">CEP *</label> 
+      <input type="text" [(ngModel)]="zipCode" name="zipCode" id="zipCode" [formControl]="formSignup.controls['zipCode']">
+      <div *ngIf="formSignup.controls['zipCode'].hasError('required') && formSignup.controls['zipCode'].touched" class="alert">O preenchimento do CEP é obrigatório.</div>
+      <div *ngIf="formSignup.controls['zipCode'].hasError('pattern') && formSignup.controls['zipCode'].touched" class="alert">Digite apenas os números do CEP.</div>
+    </div>
+
+    <div class="field">
+      <label for="streetName">Rua *</label> 
+      <input type="text" [(ngModel)]="streetName" name="streetName" id="streetName" [formControl]="formSignup.controls['streetName']">
+      <div *ngIf="formSignup.controls['streetName'].hasError('required') && formSignup.controls['streetName'].touched" class="alert">O preenchimento da Rua é obrigatório.</div>
+      <div *ngIf="formSignup.controls['streetName'].hasError('pattern') && formSignup.controls['streetName'].touched" class="alert">O campo Rua aceita apenas letras.</div>
+    </div>
+
+    <div class="field">
+      <label for="number">Número *</label> 
+      <input type="text" [(ngModel)]="number" name="number" id="number" [formControl]="formSignup.controls['number']">
+      <div *ngIf="formSignup.controls['number'].hasError('required') && formSignup.controls['number'].touched" class="alert">O preenchimento do Número é obrigatório.</div>
+      <div *ngIf="formSignup.controls['number'].hasError('pattern') && formSignup.controls['number'].touched" class="alert">>O campo Número aceita apenas números.</div>
+    </div>
+
+    <div class="field">
+      <label for="complement">Complemento</label> 
+      <input type="text" [(ngModel)]="complement" name="complement" id="complement" [formControl]="formSignup.controls['complement']">
+    </div>
+
+    <div class="field">
+      <label for="neighbourhood">Bairro</label> 
+      <input type="text" [(ngModel)]="neighbourhood" name="neighbourhood" id="neighbourhood" [formControl]="formSignup.controls['neighbourhood']">
+    </div>
+
+    <div class="field">
+      <label for="country">País *</label> 
+      <!--<input type="text" [(ngModel)]="country" name="country" id="country" [formControl]="formSignup.controls['country']">-->
+      <select [(ngModel)]="country" name="country" id="country" [formControl]="formSignup.controls['country']">
+        <option *ngFor="let c of countries" value="{{ c.value }}">{{ c.text }}</option>
+      </select>
+      <div *ngIf="formSignup.controls['country'].hasError('required') && formSignup.controls['country'].touched" class="alert">O preenchimento do País é obrigatório.</div>
+    </div>
+
+    <div class="field">
+      <label for="state">Estado *</label> 
+      <input type="text" [(ngModel)]="state" name="state" id="state" [formControl]="formSignup.controls['state']">
+      <div *ngIf="formSignup.controls['state'].hasError('required') && formSignup.controls['state'].touched" class="alert">O preenchimento do Estado é obrigatório.</div>
+      <div *ngIf="formSignup.controls['state'].hasError('pattern') && formSignup.controls['state'].touched" class="alert">O campo Estado aceita apenas letras.</div>
+    </div>
+
+    <div class="field">
+      <label for="city">Cidade *</label> 
+      <input type="text" [(ngModel)]="city" name="city" id="city" [formControl]="formSignup.controls['city']">
+      <div *ngIf="formSignup.controls['city'].hasError('required') && formSignup.controls['city'].touched" class="alert">O preenchimento de Cidade é obrigatório.</div>
+      <div *ngIf="formSignup.controls['city'].hasError('pattern') && formSignup.controls['city'].touched" class="alert">O campo Cidade aceita apenas letras</div>
+    </div>
+    
+    <div class="field">
+      <button type="submit" id="submit" #btnSend [disabled]="!formSignup.valid">Enviar</button>
+    </div>
+
+    <!--<div *ngIf="formSignup.controls['name'].hasError('required') && formSignup.controls['name'].touched" class="alert">You must include a name.</div>
+    <div *ngIf="formSignup.controls['name'].hasError('minlength') && formSignup.controls['name'].touched" class="alert">Your name must be at least 5 characters long.</div>
+    <div *ngIf="formSignup.controls['name'].hasError('maxlength') && formSignup.controls['name'].touched" class="alert">Your name cannot exceed 10 characters.</div>-->
+
+  </form>
+
+ </section>
+
