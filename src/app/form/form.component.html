@@ -1,6 +1,6 @@
  <section class="container" id="pageSignup">
 
-  <form [formGroup]="formSignup" (ngSubmit)="onSubmit()" id="formSignup" #form>
+  <form [formGroup]="formSignup" (ngSubmit)="onSubmit()" id="formSignup" #form novalidate>
 
     <div class="field">
       <label for="email">Email *</label> 
@@ -32,17 +32,18 @@
       <div *ngIf="formSignup.controls['fullName'].hasError('pattern') && formSignup.controls['fullName'].touched" class="alert">O campo Nome Completo aceita apenas letras espaços.</div>
     </div>
 
-    <div class="field" #datepicker>
+    <div class="field">
       <label for="birthDate">Data de Nascimento *</label> 
       <input type="date" [(ngModel)]="birthDate" name="birthDate" id="birthDate" [formControl]="formSignup.controls['birthDate']">
       <div *ngIf="formSignup.controls['birthDate'].hasError('required') && formSignup.controls['birthDate'].touched" class="alert">O preenchimento da Data de Nascimento é obrigatório.</div>
-      <!--<div *ngIf="formSignup.controls['birthDate'].hasError('pattern') && formSignup.controls['birthDate'].touched" class="alert">A Data de Nascimento não está no formato correto.</div>-->
+      <div *ngIf="formSignup.controls['birthDate'].hasError('pattern') && formSignup.controls['birthDate'].touched" class="alert">A Data de Nascimento não está no formato correto.</div>
     </div>
 
-    <!--<div class="field">
+    <br>
+    <div class="field">
       <label for="address">Busca endereço </label> 
       <input type="text" [(ngModel)]="address" name="address" id="address" [formControl]="formSignup.controls['address']" (setAddress)="getAddress($event)" googleplace >
-    </div>-->
+    </div>
 
     <div class="field">
       <label for="zipCode">CEP *</label> 
@@ -76,12 +77,10 @@
     </div>
 
     <div class="field">
-      <label for="country">País *</label> 
-      <!--<input type="text" [(ngModel)]="country" name="country" id="country" [formControl]="formSignup.controls['country']">-->
-      <select [(ngModel)]="country" name="country" id="country" [formControl]="formSignup.controls['country']">
-        <option *ngFor="let c of countries" value="{{ c.value }}">{{ c.text }}</option>
-      </select>
-      <div *ngIf="formSignup.controls['country'].hasError('required') && formSignup.controls['country'].touched" class="alert">O preenchimento do País é obrigatório.</div>
+      <label for="city">Cidade *</label> 
+      <input type="text" [(ngModel)]="city" name="city" id="city" [formControl]="formSignup.controls['city']">
+      <div *ngIf="formSignup.controls['city'].hasError('required') && formSignup.controls['city'].touched" class="alert">O preenchimento de Cidade é obrigatório.</div>
+      <div *ngIf="formSignup.controls['city'].hasError('pattern') && formSignup.controls['city'].touched" class="alert">O campo Cidade aceita apenas letras</div>
     </div>
 
     <div class="field">
@@ -92,14 +91,17 @@
     </div>
 
     <div class="field">
-      <label for="city">Cidade *</label> 
-      <input type="text" [(ngModel)]="city" name="city" id="city" [formControl]="formSignup.controls['city']">
-      <div *ngIf="formSignup.controls['city'].hasError('required') && formSignup.controls['city'].touched" class="alert">O preenchimento de Cidade é obrigatório.</div>
-      <div *ngIf="formSignup.controls['city'].hasError('pattern') && formSignup.controls['city'].touched" class="alert">O campo Cidade aceita apenas letras</div>
+      <label for="country">País *</label> 
+      <!--<input type="text" [(ngModel)]="country" name="country" id="country" [formControl]="formSignup.controls['country']">-->
+      <select [(ngModel)]="country" name="country" id="country" [formControl]="formSignup.controls['country']">
+        <option *ngFor="let c of countries" value="{{ c.value }}">{{ c.text }}</option>
+      </select>
+      <div *ngIf="formSignup.controls['country'].hasError('required') && formSignup.controls['country'].touched" class="alert">O preenchimento do País é obrigatório.</div>
     </div>
     
     <div class="field">
-      <button type="submit" id="submit" #btnSend [disabled]="!formSignup.valid">Enviar</button>
+      <!--<button type="submit" id="submit" #btnSend [disabled]="!formSignup.valid">Enviar</button>-->
+      <button type="submit" id="submit" #btnSend>Enviar</button>
     </div>
 
     <!--<div *ngIf="formSignup.controls['name'].hasError('required') && formSignup.controls['name'].touched" class="alert">You must include a name.</div>
